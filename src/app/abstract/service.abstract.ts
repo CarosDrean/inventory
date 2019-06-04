@@ -68,7 +68,7 @@ export abstract class Service {
       type: 'mutation',
       specificType: SpecificTypes.DELETED,
       operation: this.functions.DELETED,
-      fields: ['id'],
+      fields: ['_id'],
       id
     };
     return this.http.post(this.URL_API, this.helper.queryBuilder(query));

@@ -15,10 +15,10 @@ export class MeasuresComponent extends Componente implements OnInit {
 
   case: string;
   measure: Measure;
-  fieldsP = ['name', 'denomination'];
+  fieldsP = ['_id', 'name', 'denomination'];
 
   constructor(public ms: MeasureService, private notyfs: NotyfService) {
-    super(ms, notyfs, ['name', 'denomination']);
+    super(ms, notyfs, ['_id', 'name', 'denomination']);
     this.case = 'Nuevo';
   }
 

@@ -7,27 +7,29 @@ export class Helpers {
     const query = {
       query: `
         ${dataQuery.type} {
-          ${dataQuery.operation} ${this.queryOptions(dataQuery.type, dataQuery.data, dataQuery.id)} {
+          ${dataQuery.operation} ${this.queryOptions(dataQuery.specificType, dataQuery.data, dataQuery.id)} {
             ${dataQuery.fields.join(',')}
           }
         }
       `,
       variables: ''
     };
+    console.log('query: ' + query.query);
     return query;
   }
 
-  private queryOptions(specificType: string, data: {} = {}, id = '') {
+  private queryOptions(specificType: string, data: any = {}, id = '') {
     if (specificType === SpecificTypes.GET_ID || specificType === SpecificTypes.DELETED) {
       return `(_id: "${id}")`;
     } else if (specificType === SpecificTypes.UPDATED) {
+      delete data._id;
       return `(_id: "${id}", input: {
         ${this.inputBuilder(data)}
-      }`;
+      })`;
     } else if (specificType === SpecificTypes.CREATED) {
       return `(input: {
         ${this.inputBuilder(data)}
-      }`;
+      })`;
     } else {
       return '';
     }

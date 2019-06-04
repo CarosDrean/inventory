@@ -76,6 +76,7 @@ export abstract class Componente {
   }
 
   getKeyForDelete(key: string) {
+    console.log(key);
     this.idDelete = key;
   }
 
