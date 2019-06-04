@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MeasureService } from 'src/app/services/measure.service';
+import { Measure } from 'src/app/interfaces/measure';
 
 @Component({
   selector: 'app-measures',
@@ -13,7 +15,22 @@ export class MeasuresComponent implements OnInit {
     denominacion: ''
   };
 
-  constructor() { }
+  measure: Measure;
+
+  constructor(public ms: MeasureService) {
+    ms.getItems('oscar').subscribe((res) => {
+      console.log(res.measures);
+    });
+
+    this.measure = {
+      name: 'Hogar',
+      denomination: 'HG'
+    };
+
+    // ms.createItem(this.measure).subscribe((res) => {
+    //   console.log(res);
+    // });
+  }
 
   ngOnInit() {
   }
