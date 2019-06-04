@@ -1,4 +1,5 @@
 import { DataQuery } from '../interfaces/query';
+import { SpecificTypes } from '../interfaces/specific-types.enum';
 
 export class Helpers {
 
@@ -6,7 +7,7 @@ export class Helpers {
     const query = {
       query: `
         ${dataQuery.type} {
-          ${dataQuery.operation} ${this.detectedMutation(dataQuery.type, dataQuery.data)} {
+          ${dataQuery.operation} ${this.queryOptions(dataQuery.type, dataQuery.data, dataQuery.id)} {
             ${dataQuery.fields.join(',')}
           }
         }
@@ -16,11 +17,17 @@ export class Helpers {
     return query;
   }
 
-  private detectedMutation(type: string, data: {} = {}) {
-    if (type === 'mutation') {
+  private queryOptions(specificType: string, data: {} = {}, id = '') {
+    if (specificType === SpecificTypes.GET_ID || specificType === SpecificTypes.DELETED) {
+      return `(_id: "${id}")`;
+    } else if (specificType === SpecificTypes.UPDATED) {
+      return `(_id: "${id}", input: {
+        ${this.inputBuilder(data)}
+      }`;
+    } else if (specificType === SpecificTypes.CREATED) {
       return `(input: {
         ${this.inputBuilder(data)}
-      })`;
+      }`;
     } else {
       return '';
     }

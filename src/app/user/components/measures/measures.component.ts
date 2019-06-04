@@ -9,36 +9,12 @@ import { Measure } from 'src/app/interfaces/measure';
 })
 export class MeasuresComponent implements OnInit {
 
-  caso;
-  medida = {
-    nombre: '',
-    denominacion: ''
-  };
-
-  measure: Measure;
+  caso: string;
 
   constructor(public ms: MeasureService) {
-    ms.getItems('oscar').subscribe((res) => {
-      console.log(res.measures);
-    });
-
-    this.measure = {
-      name: 'Hogar',
-      denomination: 'HG'
-    };
-
-    // ms.createItem(this.measure).subscribe((res) => {
-    //   console.log(res);
-    // });
   }
 
   ngOnInit() {
   }
-
-  agregar(medida) {}
-
-  limpiar() {}
-
-  editar(categoria) {}
 
 }

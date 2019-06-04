@@ -3,6 +3,7 @@ import { Functions } from '../interfaces/functions';
 import { map } from 'rxjs/operators';
 import { DataQuery } from '../interfaces/query';
 import { Helpers } from '../utils/helpers';
+import { SpecificTypes } from '../interfaces/specific-types.enum';
 
 export abstract class Service {
 
@@ -17,10 +18,10 @@ export abstract class Service {
   getItems(fields: string[]) {
     const query: DataQuery = {
       type: 'query',
+      specificType: SpecificTypes.GET_ALL,
       operation: this.functions.GET_ALL,
       fields
     };
-
     return this.http.post(this.URL_API, this.helper.queryBuilder(query)).pipe(
       map((items: any) => this.items = items.data)
     );
@@ -29,8 +30,9 @@ export abstract class Service {
   getItem(id: string, fields: string[]) {
     const query: DataQuery = {
       type: 'query',
+      specificType: SpecificTypes.GET_ID,
       operation: this.functions.GET_ID,
-      data: { id },
+      id,
       fields
     };
     return this.http.post(this.URL_API, this.helper.queryBuilder(query)).pipe(
@@ -41,6 +43,7 @@ export abstract class Service {
   createItem(data: any, fields: string[]) {
     const query: DataQuery = {
       type: 'mutation',
+      specificType: SpecificTypes.CREATED,
       operation: this.functions.CREATED,
       fields,
       data
@@ -48,16 +51,25 @@ export abstract class Service {
     return this.http.post(this.URL_API, this.helper.queryBuilder(query));
   }
 
-  updateItem(item: any) {
-    return this.http.put(this.URL_API + `/${item._id}`, item);
+  updateItem(data: any, fields: string[]) {
+    const query: DataQuery = {
+      type: 'mutation',
+      specificType: SpecificTypes.UPDATED,
+      operation: this.functions.UPDATED,
+      fields,
+      id: data._id,
+      data
+    };
+    return this.http.post(this.URL_API, this.helper.queryBuilder(query));
   }
 
   deleteItem(id: string) {
     const query: DataQuery = {
       type: 'mutation',
+      specificType: SpecificTypes.DELETED,
       operation: this.functions.DELETED,
       fields: ['id'],
-      data: { id }
+      id
     };
     return this.http.post(this.URL_API, this.helper.queryBuilder(query));
   }
