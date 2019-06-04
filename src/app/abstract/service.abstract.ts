@@ -7,7 +7,7 @@ import { SpecificTypes } from '../interfaces/specific-types.enum';
 
 export abstract class Service {
 
-  items: any[];
+  items: any;
   item: any;
   private helper: Helpers;
 

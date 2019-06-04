@@ -10,6 +10,7 @@ import { OutputsComponent } from './components/outputs/outputs.component';
 import { ProductsComponent } from './components/products/products.component';
 import { MeasuresComponent } from './components/measures/measures.component';
 import { UserRoutingModule } from './user.routes';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { UserRoutingModule } from './user.routes';
   imports: [
     CommonModule,
     UserRoutingModule,
-    FormsModule
+    FormsModule,
+    SweetAlert2Module
   ]
 })
 export class UserModule { }

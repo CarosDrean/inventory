@@ -9,7 +9,7 @@
                 <button routerLink="main" type="button" class="btn btn-icons btn-rounded btn-light">
                   <i class="mdi mdi-home-outline"></i>
                 </button>
-                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal-3" (click)="limpiar()">Agregar</button>
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal-3" (click)="clean()">Agregar</button>
 
               </div>
             </div>
@@ -32,15 +32,15 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- <tr *ngFor="let categoria of _ms.items; let i = index" [attr.data-index]="i">
+                <tr *ngFor="let measure of ms.items.measures; let i = index" [attr.data-index]="i">
                   <td>{{i}}</td>
-                  <td>{{categoria.nombre}}</td>
-                  <td>{{categoria.denominacion}}</td>
+                  <td>{{measure.name}}</td>
+                  <td>{{measure.denomination}}</td>
                   <td>
-                    <label class="badge badge-success" data-toggle="modal" data-target="#exampleModal-3" (click)="editar(categoria.uid)" style="margin-right: 5px; cursor: pointer;">Editar</label>
-                    <label class="badge badge-danger" style="cursor: pointer;">Eliminar</label>
+                    <label class="badge badge-success mano" data-toggle="modal" data-target="#exampleModal-3" (click)="edit(measure._id)" style="margin-right: 5px;">Editar</label>
+                    <label class="badge badge-danger mano" (click)="getKeyForDelete(measure._id)" [swal]="deleteSwal">Eliminar</label>
                   </td>
-                </tr> -->
+                </tr>
               </tbody>
             </table>
           </div>
@@ -54,7 +54,7 @@
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header" style="padding: 1.7em;">
-        <h5 class="modal-title" id="exampleModalLabel">{{caso}} Medida</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{case}} Medida</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
@@ -63,18 +63,30 @@
         <form class="forms-sample">
           <div class="form-group">
             <label for="exampleInputName1">Nombre</label>
-            <input type="text" name="nombre" class="form-control" [(ngModel)]="medida.nombre" id="exampleInputName1" placeholder="Nombre">
+            <input type="text" name="nombre" class="form-control" [(ngModel)]="measure.name" id="exampleInputName1" placeholder="Nombre">
           </div>
           <div class="form-group">
             <label for="exampleInputName1">Denominacion</label>
-            <input type="text" name="denominacion" class="form-control" [(ngModel)]="medida.denominacion" id="exampleInputName1" placeholder="Denominacion">
+            <input type="text" name="denominacion" class="form-control" [(ngModel)]="measure.denomination" id="exampleInputName1" placeholder="Denominacion">
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="agregar(medida)">Guardar</button>
-        <button type="button" class="btn btn-light" data-dismiss="modal" (click)="limpiar()">Cancelar</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="addItem(measure)">Guardar</button>
+        <button type="button" class="btn btn-light" data-dismiss="modal" (click)="clean()">Cancelar</button>
       </div>
     </div>
   </div>
 </div>
+
+<swal
+  #deleteSwal
+  title="¿Estas seguro?"
+  text="Los datos no se podran recuperar."
+  type="warning"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (cancel)="clean()"
+  (confirm)="deleteItem()"
+>
+</swal>
