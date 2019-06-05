@@ -7,8 +7,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app.routes';
 import { MeasureService } from './services/measure.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NotyfModule } from 'ng-notyf';
+import { InterceptorService } from './interceptors/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,12 @@ import { NotyfModule } from 'ng-notyf';
     NotyfModule
   ],
   providers: [
-    MeasureService
+    MeasureService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

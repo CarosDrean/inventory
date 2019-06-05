@@ -15,7 +15,12 @@ export abstract class Componente {
   }
 
   getItems(fields: string[]) {
-    this.service.getItems(fields).subscribe();
+    this.service.getItems(fields).subscribe((res) => {
+      if (res.errors) {
+        this.notyfService.error(res.errors[0].message);
+      }
+      console.log(res);
+    });
   }
 
   addItem(item: any) {

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../interfaces/user';
 import { UserService } from '../services/user.service';
 import { NotyfService } from 'ng-notyf';
 

@@ -32,7 +32,7 @@
                 </tr>
               </thead>
               <tbody *ngIf="ms.items">
-                <tr *ngFor="let measure of ms.items.measures; let i = index" [attr.data-index]="i">
+                <tr *ngFor="let measure of ms.items.data.measures; let i = index" [attr.data-index]="i">
                   <td>{{i}}</td>
                   <td>{{measure.name}}</td>
                   <td>{{measure.denomination}}</td>

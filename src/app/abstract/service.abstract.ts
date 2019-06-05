@@ -23,7 +23,7 @@ export abstract class Service {
       fields
     };
     return this.http.post(this.URL_API, this.helper.queryBuilder(query)).pipe(
-      map((items: any) => this.items = items.data)
+      map((items: any) => this.items = items)
     );
   }
 
