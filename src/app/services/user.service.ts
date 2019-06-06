@@ -53,6 +53,10 @@ export class UserService extends Service {
   }
 
   getToken() {
-    return sessionStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      return '';
+    }
+    return token;
   }
 }

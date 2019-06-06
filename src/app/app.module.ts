@@ -10,6 +10,10 @@ import { MeasureService } from './services/measure.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NotyfModule } from 'ng-notyf';
 import { InterceptorService } from './interceptors/interceptor.service';
+import { UserService } from './services/user.service';
+import { AdminAuthGuard } from './guards/admin-auth.guard';
+import { UserAuthGuard } from './guards/user-auth.guard';
+import { InventoryService } from './services/inventory.service';
 
 @NgModule({
   declarations: [
@@ -26,6 +30,10 @@ import { InterceptorService } from './interceptors/interceptor.service';
   ],
   providers: [
     MeasureService,
+    UserService,
+    AdminAuthGuard,
+    UserAuthGuard,
+    InventoryService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,

@@ -11,4 +11,5 @@ export interface User {
   role: string;
   movements?: [Movement];
   address: string;
+  inventory?: string;
 }

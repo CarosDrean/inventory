@@ -6,12 +6,14 @@ import { UsersComponent } from './components/users/users.component';
 import { AdminRoutingModule } from './admin.routes';
 import { FormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { InventoryComponent } from './components/inventory/inventory.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     DashboardComponent,
-    UsersComponent
+    UsersComponent,
+    InventoryComponent
   ],
   imports: [
     CommonModule,

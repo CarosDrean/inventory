@@ -22,7 +22,7 @@
         </li>
       </ul>
       <ul class="navbar-nav navbar-nav-right">
-          <!--<li class="nav-item dropdown">
+        <!--<li class="nav-item dropdown">
           <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
             <i class="mdi mdi-file-document-box"></i>
             <span class="count">7</span>
@@ -82,7 +82,8 @@
             <i class="mdi mdi-bell"></i>
             <span class="count">4</span>
           </a>
-          <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+          <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+            aria-labelledby="notificationDropdown">
             <a class="dropdown-item">
               <p class="mb-0 font-weight-normal float-left">Tienes nuevas notificaciones
               </p>
@@ -120,7 +121,8 @@
           </div>
         </li>
       </ul>
-      <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+      <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+        data-toggle="offcanvas">
         <span class="icon-menu"></span>
       </button>
     </div>
@@ -137,14 +139,15 @@
                 <img src="assets/images/faces/face19.jpg" alt="profile image">
               </div>
               <div class="text-wrapper">
-                <p class="profile-name" *ngIf="user">{{user.name}}</p>
+                <p class="profile-name" *ngIf="user">{{user.firstname}}</p>
                 <div>
                   <small class="designation text-muted">Administrador</small>
                   <span class="status-indicator online"></span>
                 </div>
               </div>
             </div>
-            <button class="btn btn-success btn-block">Nuevo Pedido
+            <button class="btn btn-success btn-block" data-toggle="modal" data-target="#exampleModal-3"
+              (click)="clean()">Nuevo Inventario
               <i class="mdi mdi-plus"></i>
             </button>
           </div>
@@ -169,12 +172,9 @@
             <i class="menu-arrow"></i>
           </a>
           <div class="collapse" id="ui-basic">
-            <ul class="nav flex-column sub-menu">
-              <li class="nav-item">
-                <a class="nav-link" routerLink="pedidos" routerLinkActive="active">Pedidos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="hacer-pedido" routerLinkActive="active">Hacer Pedido</a>
+            <ul class="nav flex-column sub-menu" *ngIf="is.items">
+              <li class="nav-item" *ngFor="let inventory of is.items.data.inventorys; let i = index" [attr.data-index]="i">
+                <a class="nav-link" [routerLink]="['inventory', inventory._id]" routerLinkActive="active">{{inventory.name}}</a>
               </li>
             </ul>
           </div>
@@ -207,4 +207,37 @@
     <!-- main-panel ends -->
   </div>
   <!-- page-body-wrapper ends -->
+</div>
+
+<div class="modal fade" id="exampleModal-3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-3"
+  style="display: none;">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="padding: 1.7em;">
+        <h5 class="modal-title" id="exampleModalLabel">{{case}} Inventario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 1.7em;">
+        <form class="forms-sample">
+          <div class="form-group">
+            <label for="exampleInputName1">Nombre</label>
+            <input type="text" name="nombre" class="form-control" [(ngModel)]="inventory.name" id="exampleInputName1"
+              placeholder="Nombre">
+          </div>
+          <div class="form-group">
+            <label for="exampleTextarea1">Descripcion</label>
+            <textarea class="form-control" id="exampleTextarea1" name="description" [(ngModel)]="inventory.description"
+              rows="3" placeholder="Descripcion">
+            </textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="addItem(inventory)">Guardar</button>
+        <button type="button" class="btn btn-light" data-dismiss="modal" (click)="clean()">Cancelar</button>
+      </div>
+    </div>
+  </div>
 </div>
