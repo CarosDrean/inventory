@@ -23,6 +23,15 @@ export abstract class Componente {
     });
   }
 
+  getItemsId(id: string, fields: string[]) {
+    this.service.getItemsId(id, fields).subscribe((res) => {
+      if (res.errors) {
+        this.notyfService.error(res.errors[0].message);
+      }
+      console.log(res);
+    });
+  }
+
   addItem(item: any) {
     if (this.idEdit !== '') {
       this.service.updateItem(item, this.fields).subscribe((res) => {

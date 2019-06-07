@@ -15,7 +15,6 @@ export class MeasuresComponent extends Componente implements OnInit {
 
   case: string;
   measure: Measure;
-  fieldsP = ['_id', 'name', 'denomination'];
 
   constructor(public ms: MeasureService, private notyfs: NotyfService) {
     super(ms, notyfs, ['_id', 'name', 'denomination']);
@@ -23,6 +22,10 @@ export class MeasuresComponent extends Componente implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  getItems(fields: string[]) {
+    this.getItemsId(sessionStorage.getItem('_idInventory'), fields);
   }
 
   edit(measure: Measure) {

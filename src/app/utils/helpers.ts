@@ -21,7 +21,8 @@ export class Helpers {
   private queryOptions(specificType: string, data: any = {}, id = '') {
     if (specificType === SpecificTypes.GET_ID || specificType === SpecificTypes.DELETED) {
       return `(_id: "${id}")`;
-      // TODO: obtener el nombre del parametro
+    } else if (specificType === SpecificTypes.GET_ALL_ID) {
+      return `(inventory: "${id}")`;
     } else if (specificType === SpecificTypes.UPDATED) {
       delete data._id;
       return `(_id: "${id}", input: {

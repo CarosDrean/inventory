@@ -79,7 +79,7 @@
         </li>
         <li class="nav-item dropdown d-none d-xl-inline-block">
           <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-            <span class="profile-text" *ngIf="almacen">{{almacen}}</span>
+            <span class="profile-text" *ngIf="inventory">{{inventory.name}}</span>
             <img class="img-xs rounded-circle" src="assets/images/faces/face19.jpg" alt="Profile image">
           </a>
           <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
@@ -157,7 +157,7 @@
         </li>
 
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="productos">
+          <a class="nav-link" routerLink="products">
             <i class="menu-icon mdi mdi-calendar-text"></i>
             <span class="menu-title">Productos</span>
           </a>

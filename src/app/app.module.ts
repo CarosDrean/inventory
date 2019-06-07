@@ -14,6 +14,10 @@ import { UserService } from './services/user.service';
 import { AdminAuthGuard } from './guards/admin-auth.guard';
 import { UserAuthGuard } from './guards/user-auth.guard';
 import { InventoryService } from './services/inventory.service';
+import { ProductService } from './services/product.service';
+import { CategoryService } from './services/category.service';
+import { CompatibilityService } from './services/compatibility.service';
+import { MovementService } from './services/movement.service';
 
 @NgModule({
   declarations: [
@@ -33,6 +37,10 @@ import { InventoryService } from './services/inventory.service';
     UserService,
     AdminAuthGuard,
     UserAuthGuard,
+    ProductService,
+    CategoryService,
+    CompatibilityService,
+    MovementService,
     InventoryService,
     {
       provide: HTTP_INTERCEPTORS,

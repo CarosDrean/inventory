@@ -1,9 +1,17 @@
 import { Injectable } from '@angular/core';
+import { Service } from '../abstract/service.abstract';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment.prod';
+import { Functions } from '../interfaces/functions';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class ProductService extends Service {
 
-  constructor() { }
+  constructor(private https: HttpClient) {
+    super(https, environment.api, new Functions(
+      'product', 'products', 'productsInventory', 'createProduct', 'updateProduct', 'deleteProduct'
+      ));
+  }
 }

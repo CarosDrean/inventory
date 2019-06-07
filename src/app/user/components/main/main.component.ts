@@ -15,17 +15,20 @@ export class MainComponent implements OnInit {
   inventory: Inventory;
   user: User;
 
-  constructor(private router: Router, private us: UserService, private is: InventoryService) { 
+  constructor(private router: Router, private us: UserService, private is: InventoryService) {
     this.getUser();
   }
-    
+
   ngOnInit() {
   }
 
   logOut() {
-
+    sessionStorage.removeItem('_id');
+    sessionStorage.removeItem('rol');
+    sessionStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
-  
+
   getUser() {
     const id = sessionStorage.getItem('_id');
     this.us.getItem(id, ['firstname', 'inventory']).subscribe(() => {
@@ -36,8 +39,8 @@ export class MainComponent implements OnInit {
       this.getInventory(this.user.inventory);
     });
   }
-  
-  getInventory(id: string){
+
+  getInventory(id: string) {
     this.is.getItem(id, ['name', '_id']).subscribe(() => {
       this.inventory = this.is.item.inventory;
       sessionStorage.setItem('_idInventory', this.inventory._id);
