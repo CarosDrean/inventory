@@ -12,6 +12,8 @@ export class InventoryComponent implements OnInit {
     console.log(router.snapshot.paramMap.get('id'));
   }
 
+  // TODO: no debe mostrar que no es administrador, el notify
+
   ngOnInit() {
   }
 

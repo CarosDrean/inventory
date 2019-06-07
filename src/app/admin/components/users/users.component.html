@@ -58,7 +58,7 @@
                     {{user.role}}
                   </td>
                   <td>
-                    <label class="badge badge-success" data-toggle="modal" data-target="#exampleModal"
+                    <label class="badge badge-success mano" data-toggle="modal" data-target="#exampleModal"
                       (click)="edit(user)" style="margin-right: 5px;">Editar</label>
                     <label class="badge badge-danger mano" (click)="getKeyForDelete(user._id)">Eliminar</label>
                   </td>
@@ -162,18 +162,21 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label" for="exampleSelectPrimary">Rol</label>
                   <div class="col-sm-9">
-                    <select class="form-control border-primary" id="exampleSelectPrimary" name="role" [(ngModel)]="user.role">
+                    <select class="form-control" id="exampleSelectPrimary" name="role" [(ngModel)]="user.role">
                       <option value="Admin">Administrador</option>
                       <option value="User">Usuario</option>
                     </select>
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="this.user.role !== 'Admin'">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Telefono</label>
+                  <label class="col-sm-3 col-form-label">Inventario</label>
                   <div class="col-sm-9">
-                    <input type="number" class="form-control" name="test" [(ngModel)]="user.phone" />
+                    <select *ngIf="is.items" class="form-control border-primary" id="exampleSelectPrimar" name="inventory" [(ngModel)]="user.inventory">
+                      <option *ngFor="let inventory of is.items.data.inventorys" value="{{inventory._id}}">{{inventory.name}}</option>
+                    </select>
+                    <label *ngIf="!is.items" class="col-sm-3 col-form-label">Aun no tiene inventarios creados.</label>
                   </div>
                 </div>
               </div>

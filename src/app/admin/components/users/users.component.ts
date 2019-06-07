@@ -3,6 +3,7 @@ import { Componente } from 'src/app/abstract/componente.abstract';
 import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 import { NotyfService } from 'ng-notyf';
+import { InventoryService } from 'src/app/services/inventory.service';
 
 declare var $: any;
 
@@ -15,11 +16,12 @@ export class UsersComponent extends Componente implements OnInit {
 
   case: string;
   user: User;
-  fieldsP = ['_id', 'firstname', 'user', 'phone', 'role'];
+  fieldsP = ['_id', 'firstname', 'lastname', 'user', 'password', 'phone', 'dni', 'address', 'role'];
 
-  constructor(public us: UserService, private notyfs: NotyfService) {
-    super(us, notyfs, ['_id', 'firstname', 'user', 'phone', 'role']);
+  constructor(public us: UserService, private notyfs: NotyfService, public is: InventoryService) {
+    super(us, notyfs, ['_id', 'firstname', 'lastname', 'user', 'password', 'phone', 'dni', 'address', 'role', 'inventory']);
     this.case = 'Nuevo';
+    is.getItems(['_id', 'name']).subscribe();
   }
 
   ngOnInit() {
