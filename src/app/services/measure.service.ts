@@ -10,6 +10,8 @@ import { Service } from '../abstract/service.abstract';
 })
 export class MeasureService extends Service {
   constructor(private https: HttpClient) {
-    super(https, environment.api, new Functions('measure', 'measures', 'createMeasure', 'updateMeasure', 'deleteMeasure'));
+    super(https, environment.api, new Functions(
+      'measure', 'measures', 'measuresInventory', 'createMeasure', 'updateMeasure', 'deleteMeasure'
+      ));
   }
 }

@@ -12,7 +12,7 @@ import { User } from '../interfaces/user';
 export class UserService extends Service {
 
   constructor(private https: HttpClient, private router: Router) {
-    super(https, environment.api, new Functions('user', 'users', 'createUser', 'updateUser', 'deleteUser'));
+    super(https, environment.api, new Functions('user', 'users', '', 'createUser', 'updateUser', 'deleteUser'));
   }
 
   private queryLogin(email: string, password: string) {

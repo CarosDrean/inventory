@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
+import { InventoryService } from 'src/app/services/inventory.service';
+import { Inventory } from 'src/app/interfaces/inventory';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-main',
@@ -7,16 +12,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  almacen;
-  usuario;
+  inventory: Inventory;
+  user: User;
 
-  constructor() { }
-
+  constructor(private router: Router, private us: UserService, private is: InventoryService) { 
+    this.getUser();
+  }
+    
   ngOnInit() {
   }
 
   logOut() {
 
   }
+  
+  getUser() {
+    const id = sessionStorage.getItem('_id');
+    this.us.getItem(id, ['firstname', 'inventory']).subscribe(() => {
+      this.user = this.us.item.user;
+      if (!this.user) {
+        this.router.navigate(['/login']);
+      }
+      this.getInventory(this.user.inventory);
+    });
+  }
+  
+  getInventory(id: string){
+    this.is.getItem(id, ['name', '_id']).subscribe(() => {
+      this.inventory = this.is.item.inventory;
+      sessionStorage.setItem('_idInventory', this.inventory._id);
+    });
+
+  }
+
 
 }

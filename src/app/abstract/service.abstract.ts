@@ -27,6 +27,19 @@ export abstract class Service {
     );
   }
 
+  getItemsId(id: string, fields: string[]) {
+    const query: DataQuery = {
+      type: 'query',
+      specificType: SpecificTypes.GET_ALL_ID,
+      operation: this.functions.GET_ALL_ID,
+      fields,
+      id
+    };
+    return this.http.post(this.URL_API, this.helper.queryBuilder(query)).pipe(
+      map((items: any) => this.items = items)
+    );
+  }
+
   getItem(id: string, fields: string[]) {
     const query: DataQuery = {
       type: 'query',

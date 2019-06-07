@@ -35,7 +35,8 @@ export class MeasuresComponent extends Componente implements OnInit {
   resetItem() {
     this.measure = {
       denomination: '',
-      name: ''
+      name: '',
+      inventory: sessionStorage.getItem('_idInventory')
     };
   }
 

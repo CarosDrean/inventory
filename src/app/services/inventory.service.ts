@@ -10,6 +10,6 @@ import { Functions } from '../interfaces/functions';
 export class InventoryService extends Service {
 
   constructor(private https: HttpClient) {
-    super(https, environment.api, new Functions('inventory', 'inventorys', 'createInventory', 'updateInventory', 'deleteInventory'));
+    super(https, environment.api, new Functions('inventory', 'inventorys', '', 'createInventory', 'updateInventory', 'deleteInventory'));
   }
 }

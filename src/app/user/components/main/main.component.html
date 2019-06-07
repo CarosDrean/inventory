@@ -125,9 +125,9 @@
                 <img src="assets/images/faces/face19.jpg" alt="profile image">
               </div>
               <div class="text-wrapper">
-                <p class="profile-name" *ngIf="usuario">{{usuario.nombre}}</p>
+                <p class="profile-name" *ngIf="user">{{user.firstname}}</p>
                 <div>
-                  <small class="designation text-muted">Almacenero</small>
+                  <small class="designation text-muted" *ngIf="inventory">Inventario - {{inventory.name}}</small>
                   <span class="status-indicator online"></span>
                 </div>
               </div>
