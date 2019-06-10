@@ -2,3 +2,7 @@
 .mano {
   cursor: pointer;
 }
+
+.alerta {
+  color: red;
+}

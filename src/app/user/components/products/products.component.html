@@ -44,18 +44,18 @@
                 </tr>
               </thead>
               <tbody *ngIf="ps.items">
-                <tr *ngFor="let products of ps.items.data.productsInventory; let i = index" [attr.data-index]="i">
+                <tr *ngFor="let product of ps.items.data.productsInventory; let i = index" [attr.data-index]="i">
                   <td>
-                    {{products.name}}
+                    {{product.name}}
                   </td>
                   <td>
-                    {{products.model}}
+                    {{product.model}}
                   </td>
                   <td>
-                    {{products.price}}
+                    {{product.price}}
                   </td>
                   <td>
-                    {{products.stock}}
+                    {{product.stock}}
                   </td>
                   <td>
                     <label class="badge badge-success mano" data-toggle="modal" data-target="#exampleModal"
@@ -157,42 +157,41 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label" for="exampleSelectPrimary">Compatibilidad</label>
-                  <div class="col-sm-9">
-                    <select class="form-control" id="exampleSelectPrimary" name="role" [(ngModel)]="product.compatibility">
-                      // TODO: asignar aqui valor de la base de datos, ademas debe poderse seleccionar varios
-                      <option value="Admin">Administrador</option>
-                      <option value="User">Usuario</option>
+                  <label class="col-sm-3 col-form-label">Unidad de Medida</label>
+                  <div *ngIf="ms.items" class="col-sm-9">
+                    <select *ngIf="ms.items.data.measuresInventory[0]" class="form-control" id="exampleSelectPrimar" name="measure" [(ngModel)]="product.measure">
+                      <option *ngFor="let measure of ms.items.data.measuresInventory" value="{{measure._id}}">{{measure.name}}</option>
                     </select>
+                    <label *ngIf="!ms.items.data.measuresInventory[0]" class="alerta col-form-label">¡Aun no tiene unidades de medida creadas!</label>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- <div class="row">
+            <div class="row">
               <div class="col-md-6">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label" for="exampleSelectPrimary">Rol</label>
-                  <div class="col-sm-9">
-                    <select class="form-control" id="exampleSelectPrimary" name="role" [(ngModel)]="user.role">
-                      <option value="Admin">Administrador</option>
-                      <option value="User">Usuario</option>
+                  <label class="col-sm-3 col-form-label">Categoria</label>
+                  <div *ngIf="cts.items" class="col-sm-9">
+                    <select *ngIf="cts.items.data.categorysInventory[0]" class="form-control" id="exampleSelectPrimar" name="category" [(ngModel)]="product.category">
+                      <option *ngFor="let category of cts.items.data.categorysInventory" value="{{category._id}}">{{category.name}}</option>
                     </select>
+                    <label *ngIf="!cts.items.data.categorysInventory[0]" class="alerta col-form-label">¡Aun no tiene categorias creadas!</label>
                   </div>
                 </div>
               </div>
-              <div class="col-md-6" *ngIf="this.user.role !== 'Admin'">
+              <div class="col-md-6">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Inventario</label>
-                  <div class="col-sm-9">
-                    <select *ngIf="is.items" class="form-control border-primary" id="exampleSelectPrimar" name="inventory" [(ngModel)]="user.inventory">
-                      <option *ngFor="let inventory of is.items.data.inventorys" value="{{inventory._id}}">{{inventory.name}}</option>
+                  <label class="col-sm-3 col-form-label">Compatibilidad</label>
+                  <div *ngIf="cbs.items" class="col-sm-9">
+                    <select *ngIf="cbs.items.data.compatibilitysInventory[0]" class="form-control" id="exampleSelectPrimar" name="compatibility" [(ngModel)]="product.compatibility">
+                      <option *ngFor="let compatibility of cbs.items.data.compatibilitysInventory" value="{{compatibility._id}}">{{compatibility.name}}</option>
                     </select>
-                    <label *ngIf="!is.items" class="col-sm-3 col-form-label">Aun no tiene inventarios creados.</label>
+                    <label *ngIf="!cbs.items.data.compatibilitysInventory[0]" class="alerta col-form-label">¡Aun no tiene compatibilidades creadas!</label>
                   </div>
                 </div>
               </div>
-            </div> -->
+            </div>
           </form>
         </div>
       </div>

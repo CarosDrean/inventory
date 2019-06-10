@@ -19,6 +19,8 @@ export class ProductsComponent extends Componente implements OnInit {
   case: string;
   product: Product;
 
+  // TODO: El color y la compatibilidad deben ser arrays
+
   constructor(
     public ps: ProductService,
     private notyfs: NotyfService,
@@ -26,8 +28,13 @@ export class ProductsComponent extends Componente implements OnInit {
     public cbs: CompatibilityService,
     public cts: CategoryService
     ) {
-    super(ps, notyfs, ['_id', 'name', 'model', 'price', 'stock']);
+    super(ps, notyfs,
+      ['_id', 'name', 'category', 'model', 'description', 'trademark', 'measure', 'color', 'price', 'stock', 'compatibility']);
     this.case = 'Nuevo';
+    const idInventory = sessionStorage.getItem('_idInventory');
+    ms.getItemsId(idInventory, ['_id', 'name']).subscribe();
+    cbs.getItemsId(idInventory, ['_id', 'name']).subscribe();
+    cts.getItemsId(idInventory, ['_id', 'name']).subscribe();
   }
 
   ngOnInit() {

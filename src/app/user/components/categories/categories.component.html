@@ -1,3 +1,92 @@
-<p>
-  categories works!
-</p>
+<div class="content-wrapper">
+  <div class="row">
+    <div class="col-12 grid-margin">
+      <div class="card">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card-body">
+              <div class="template-demo">
+                <button routerLink="main" type="button" class="btn btn-icons btn-rounded btn-light">
+                  <i class="mdi mdi-home-outline"></i>
+                </button>
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal-3" (click)="clean()">Agregar</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Lista de Categorias</h4>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nombre</th>
+                  <th>Denominacion</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="cs.items">
+                <tr *ngFor="let category of cs.items.data.categorysInventory; let i = index" [attr.data-index]="i">
+                  <td>{{i}}</td>
+                  <td>{{category.name}}</td>
+                  <td>{{category.denomination}}</td>
+                  <td>
+                    <label class="badge badge-success mano" data-toggle="modal" data-target="#exampleModal-3" (click)="edit(category)" style="margin-right: 5px;">Editar</label>
+                    <label class="badge badge-danger mano" (click)="getKeyForDelete(category._id)" [swal]="deleteSwal">Eliminar</label>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal-3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-3" style="display: none;">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="padding: 1.7em;">
+        <h5 class="modal-title" id="exampleModalLabel">{{case}} Categoria</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 1.7em;">
+        <form class="forms-sample">
+          <div class="form-group">
+            <label for="exampleInputName1">Nombre</label>
+            <input type="text" name="nombre" class="form-control" [(ngModel)]="category.name" id="exampleInputName1" placeholder="Nombre">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputName1">Denominacion</label>
+            <input type="text" name="denominacion" class="form-control" [(ngModel)]="category.denomination" id="exampleInputName1" placeholder="Denominacion">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="addItem(category)">Guardar</button>
+        <button type="button" class="btn btn-light" data-dismiss="modal" (click)="clean()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<swal
+  #deleteSwal
+  title="¿Estas seguro?"
+  text="Los datos no se podran recuperar."
+  type="warning"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (cancel)="clean()"
+  (confirm)="deleteItem()"
+>
+</swal>
