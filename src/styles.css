@@ -6,3 +6,9 @@
 .alerta {
   color: red;
 }
+
+.autocomplete-container {
+  box-shadow: none !important;
+  border: 1px solid #f2f2f2;
+}
+

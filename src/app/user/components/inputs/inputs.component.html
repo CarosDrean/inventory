@@ -1,3 +1,127 @@
-<p>
-  inputs works!
-</p>
+<div class="content-wrapper">
+  <div class="row">
+    <div class="col-12 grid-margin">
+      <div class="card">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card-body">
+              <div class="template-demo">
+                <button routerLink="main" type="button" class="btn btn-icons btn-rounded btn-light">
+                  <i class="mdi mdi-home-outline"></i>
+                </button>
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal-3" (click)="clean()">Agregar</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Lista de Entradas</h4>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Producto</th>
+                  <th>Cantidad</th>
+                  <th>Precio de Compra</th>
+                  <th>Fecha</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="ms.items">
+                <tr *ngFor="let input of ms.items.data.movementsInventory; let i = index" [attr.data-index]="i">
+                  <td>{{i}}</td>
+                  <td>{{input.product}}</td>
+                  <td>{{input.quantity}}</td>
+                  <td>{{input.pricePurchase}}</td>
+                  <td>{{input.date}}</td>
+                  <td>
+                    <label class="badge badge-success mano" data-toggle="modal" data-target="#exampleModal-3" (click)="edit(input)" style="margin-right: 5px;">Editar</label>
+                    <label class="badge badge-danger mano" (click)="getKeyForDelete(input._id)" [swal]="deleteSwal">Eliminar</label>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal-3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-3" style="display: none;">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="padding: 1.7em;">
+        <h5 class="modal-title" id="exampleModalLabel">{{case}} Entrada</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 1.7em;">
+        <form class="forms-sample">
+          <div class="form-group">
+            <label for="exampleInputName1">Nombre Producto</label>
+            <!-- <input type="text" name="nombre" class="form-control" [(ngModel)]="input.product" id="exampleInputName1" placeholder="Nombre"> -->
+            <div *ngIf="ps.items">
+              <ng-autocomplete
+                [data]="ps.items.data.productsInventory"
+                [searchKeyword]="keyword"
+                [itemTemplate]="itemTemplate"
+                (selected)='selectEvent($event)'
+                [notFoundTemplate]="notFoundTemplate">
+              </ng-autocomplete>
+
+              <ng-template #itemTemplate let-item>
+              <a [innerHTML]="item.name"></a>
+              </ng-template>
+
+              <ng-template #notFoundTemplate let-notFound>
+              <!-- <div [innerHTML]="notFound"></div> -->
+              <div>Sin coincidencias.</div>
+              </ng-template>
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputName2">Cantidad</label>
+            <input type="text" name="quantity" class="form-control" [(ngModel)]="input.quantity" id="exampleInputName2" placeholder="Cantidad">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputName3">Precio por Unidad (Compra)</label>
+            <input type="text" name="price" class="form-control" [(ngModel)]="input.pricePurchase" id="exampleInputName3" placeholder="Precio por Unidad">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputName4">Total</label>
+            <input type="text" name="total" class="form-control" [(ngModel)]="input.priceTotal" id="exampleInputName4" placeholder="Total">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputName5">Precio de Venta</label>
+            <input type="text" name="pricesale" class="form-control" [(ngModel)]="input.priceUnit" id="exampleInputName5" placeholder="Precio de Venta">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="addItem(input)">Guardar</button>
+        <button type="button" class="btn btn-light" data-dismiss="modal" (click)="clean()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<swal
+  #deleteSwal
+  title="¿Estas seguro?"
+  text="Los datos no se podran recuperar."
+  type="warning"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (cancel)="clean()"
+  (confirm)="deleteItem()"
+>
+</swal>
+

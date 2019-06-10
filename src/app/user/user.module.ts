@@ -11,6 +11,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { MeasuresComponent } from './components/measures/measures.component';
 import { UserRoutingModule } from './user.routes';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     CommonModule,
     UserRoutingModule,
     FormsModule,
+    AutocompleteLibModule,
     SweetAlert2Module
   ]
 })
