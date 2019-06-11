@@ -1,5 +1,5 @@
 import { DataQuery } from '../interfaces/query';
-import { SpecificTypes } from '../interfaces/specific-types.enum';
+import { SpecificTypes } from './specific-types.enum';
 
 export class Helpers {
 

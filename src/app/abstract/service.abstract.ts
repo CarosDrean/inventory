@@ -3,7 +3,7 @@ import { Functions } from '../utils/functions';
 import { map } from 'rxjs/operators';
 import { DataQuery } from '../interfaces/query';
 import { Helpers } from '../utils/helpers';
-import { SpecificTypes } from '../interfaces/specific-types.enum';
+import { SpecificTypes } from '../utils/specific-types.enum';
 
 export abstract class Service {
 
