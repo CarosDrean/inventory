@@ -1,8 +1,6 @@
 import { Service } from './service.abstract';
 import { NotyfService } from 'ng-notyf';
 
-declare var $: any;
-
 export abstract class Componente {
 
   idEdit: string;

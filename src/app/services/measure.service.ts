@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment.prod';
-import { Functions } from '../interfaces/functions';
+import { Functions } from '../utils/functions';
 import { Service } from '../abstract/service.abstract';
 
 @Injectable({

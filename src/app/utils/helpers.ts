@@ -7,7 +7,7 @@ export class Helpers {
     const query = {
       query: `
         ${dataQuery.type} {
-          ${dataQuery.operation} ${this.queryOptions(dataQuery.specificType, dataQuery.data, dataQuery.id)} {
+          ${dataQuery.operation} ${this.queryOptions(dataQuery.specificType, dataQuery.data, dataQuery.id, dataQuery.nameContent)} {
             ${dataQuery.fields.join(',')}
           }
         }
@@ -18,11 +18,11 @@ export class Helpers {
     return query;
   }
 
-  private queryOptions(specificType: string, data: any = {}, id = '') {
+  private queryOptions(specificType: string, data: any = {}, id = '', nameContent: string) {
     if (specificType === SpecificTypes.GET_ID || specificType === SpecificTypes.DELETED) {
       return `(_id: "${id}")`;
     } else if (specificType === SpecificTypes.GET_ALL_ID) {
-      return `(inventory: "${id}")`;
+      return `(${nameContent}: "${id}")`;
     } else if (specificType === SpecificTypes.UPDATED) {
       delete data._id;
       return `(_id: "${id}", input: {

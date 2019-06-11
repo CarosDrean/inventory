@@ -5,4 +5,5 @@ export interface DataQuery {
   id?: string;
   specificType: string;
   data?: {};
+  nameContent?: string;
 }

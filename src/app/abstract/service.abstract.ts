@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Functions } from '../interfaces/functions';
+import { Functions } from '../utils/functions';
 import { map } from 'rxjs/operators';
 import { DataQuery } from '../interfaces/query';
 import { Helpers } from '../utils/helpers';
@@ -10,6 +10,7 @@ export abstract class Service {
   items: any;
   item: any;
   private helper: Helpers;
+  private nameContent = 'inventory';
 
   // TODO: falta regresar mensajes personalizados
 
@@ -35,7 +36,8 @@ export abstract class Service {
       specificType: SpecificTypes.GET_ALL_ID,
       operation: this.functions.GET_ALL_ID,
       fields,
-      id
+      id,
+      nameContent: this.nameContent
     };
     return this.http.post(this.URL_API, this.helper.queryBuilder(query)).pipe(
       map((items: any) => this.items = items)

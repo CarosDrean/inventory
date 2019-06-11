@@ -3,7 +3,7 @@ import { Service } from '../abstract/service.abstract';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
-import { Functions } from '../interfaces/functions';
+import { Functions } from '../utils/functions';
 import { User } from '../interfaces/user';
 
 @Injectable({
