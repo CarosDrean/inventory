@@ -12,8 +12,6 @@ export abstract class Service {
   private helper: Helpers;
   private nameContent = 'inventory';
 
-  // TODO: falta regresar mensajes personalizados
-
   constructor(private http: HttpClient, readonly URL_API: string, private functions: Functions) {
     this.helper = new Helpers();
   }

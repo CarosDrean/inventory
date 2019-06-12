@@ -29,7 +29,8 @@ export class ProductsComponent extends Componente implements OnInit {
     public cts: CategoryService
     ) {
     super(ps, notyfs,
-      ['_id', 'name', 'category', 'model', 'description', 'trademark', 'measure', 'color', 'price', 'stock', 'compatibility']);
+      ['_id', 'name', 'category', 'model', 'description', 'trademark', 'measure', 'color', 'price', 'stock', 'compatibility'],
+      'Producto');
     this.case = 'Nuevo';
     const idInventory = sessionStorage.getItem('_idInventory');
     ms.getItemsId(idInventory, ['_id', 'name']).subscribe();

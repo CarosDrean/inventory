@@ -21,7 +21,7 @@ export class MainComponent extends Componente implements OnInit {
   fieldsP = ['_id', 'name', 'description'];
 
   constructor(public is: InventoryService, private notyfs: NotyfService, private router: Router, private us: UserService) {
-    super(is, notyfs, ['_id', 'name', 'description']);
+    super(is, notyfs, ['_id', 'name', 'description'], 'Inventario');
     this.case = 'Nuevo';
     this.getUser();
   }

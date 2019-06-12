@@ -19,7 +19,9 @@ export class UsersComponent extends Componente implements OnInit {
   fieldsP = ['_id', 'firstname', 'lastname', 'user', 'password', 'phone', 'dni', 'address', 'role'];
 
   constructor(public us: UserService, private notyfs: NotyfService, public is: InventoryService) {
-    super(us, notyfs, ['_id', 'firstname', 'lastname', 'user', 'password', 'phone', 'dni', 'address', 'role', 'inventory']);
+    super(us, notyfs,
+      ['_id', 'firstname', 'lastname', 'user', 'password', 'phone', 'dni', 'address', 'role', 'inventory'],
+      'Usuario');
     this.case = 'Nuevo';
     is.getItems(['_id', 'name']).subscribe();
   }

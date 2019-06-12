@@ -17,7 +17,7 @@ export class MeasuresComponent extends Componente implements OnInit {
   measure: Measure;
 
   constructor(public ms: MeasureService, private notyfs: NotyfService) {
-    super(ms, notyfs, ['_id', 'name', 'denomination']);
+    super(ms, notyfs, ['_id', 'name', 'denomination'], 'Medida');
     this.case = 'Nuevo';
   }
 

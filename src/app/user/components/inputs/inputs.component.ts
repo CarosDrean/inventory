@@ -21,7 +21,7 @@ export class InputsComponent extends Componente implements OnInit {
 
   // 'product{_id,name}' es por que necesito lo que hay dentro de producto
   constructor(public ms: MovementService, private notyfs: NotyfService, public ps: ProductService) {
-    super(ms, notyfs, ['_id', 'product{_id,name}', 'quantity', 'pricePurchase', 'date']);
+    super(ms, notyfs, ['_id', 'product{_id,name}', 'quantity', 'pricePurchase', 'date'], 'Entrada');
     this.case = 'Nueva';
     const idInventory = sessionStorage.getItem('_idInventory');
     ps.getItemsId(idInventory, ['_id', 'name']).subscribe();

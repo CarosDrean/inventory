@@ -17,7 +17,7 @@ export class CategoriesComponent extends Componente implements OnInit {
   category: Category;
 
   constructor(public cs: CategoryService, private notyfs: NotyfService) {
-    super(cs, notyfs, ['_id', 'name', 'denomination']);
+    super(cs, notyfs, ['_id', 'name', 'denomination'], 'Categoria');
     this.case = 'Nueva';
   }
 

@@ -17,7 +17,7 @@ export class CompatibilitiesComponent extends Componente implements OnInit {
   compatibility: Compatibility;
 
   constructor(public cs: CompatibilityService, private notyfs: NotyfService) {
-    super(cs, notyfs, ['_id', 'name', 'denomination']);
+    super(cs, notyfs, ['_id', 'name', 'denomination'], 'Compatibilidad');
     this.case = 'Nueva';
   }
 
